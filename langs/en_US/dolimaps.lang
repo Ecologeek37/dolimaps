@@ -28,10 +28,7 @@ ModuleDoliMapsDesc = DoliMaps description
 DoliMapsSetup = DoliMaps setup
 Settings = Settings
 DoliMapsSetupPage = DoliMaps setup page
-DOLIMAPS_MYPARAM1 = My param 1
-DOLIMAPS_MYPARAM1Tooltip = My param 1 tooltip
-DOLIMAPS_MYPARAM2=My param 2
-DOLIMAPS_MYPARAM2Tooltip=My param 2 tooltip
+DOLIMAPS_MAPS_TYPE = Map type
 
 
 #
@@ -40,15 +37,3 @@ DOLIMAPS_MYPARAM2Tooltip=My param 2 tooltip
 About = About
 DoliMapsAbout = About DoliMaps
 DoliMapsAboutPage = DoliMaps about page
-
-#
-# Sample page
-#
-DoliMapsArea = Home DoliMaps
-MyPageName = My page name
-
-#
-# Sample widget
-#
-MyWidget = My widget
-MyWidgetDescription = My widget description

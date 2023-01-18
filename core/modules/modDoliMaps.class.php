@@ -45,7 +45,7 @@ class modDoliMaps extends DolibarrModules
 
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
-		$this->numero = 500003; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
+		$this->numero = 437601; // TODO Go on page https://wiki.dolibarr.org/index.php/List_of_modules_id to reserve an id number for your module
 
 		// Key text used to identify module (for permissions, menus, etc...)
 		$this->rights_class = 'dolimaps';
@@ -115,11 +115,10 @@ class modDoliMaps extends DolibarrModules
 			),
 			// Set here all hooks context managed by module. To find available hook context, make a "grep -r '>initHooks(' *" on source code. You can also set hook context to 'all'
 			'hooks' => array(
-				//   'data' => array(
-				//       'hookcontext1',
-				//       'hookcontext2',
-				//   ),
-				//   'entity' => '0',
+				   'data' => array(
+				       'main',
+				   ),
+				   'entity' => '0',
 			),
 			// Set this to 1 if features of module are opened to external users
 			'moduleforexternal' => 0,
@@ -136,7 +135,7 @@ class modDoliMaps extends DolibarrModules
 		// A condition to hide module
 		$this->hidden = false;
 		// List of module class names as string that must be enabled if this module is enabled. Example: array('always1'=>'modModuleToEnable1','always2'=>'modModuleToEnable2', 'FR1'=>'modModuleToEnableFR'...)
-		$this->depends = array();
+		$this->depends = array("modSociete");
 		$this->requiredby = array(); // List of module class names as string to disable if this one is disabled. Example: array('modModuleToDisable1', ...)
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with. Example: array('modModuleToDisable1', ...)
 
@@ -286,69 +285,6 @@ class modDoliMaps extends DolibarrModules
 		// Main menu entries to add
 		$this->menu = array();
 		$r = 0;
-		// Add here entries to declare new menus
-		/* BEGIN MODULEBUILDER TOPMENU */
-		$this->menu[$r++] = array(
-			'fk_menu'=>'', // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'top', // This is a Top menu entry
-			'titre'=>'ModuleDoliMapsName',
-			'prefix' => img_picto('', $this->picto, 'class="paddingright pictofixedwidth valignmiddle"'),
-			'mainmenu'=>'dolimaps',
-			'leftmenu'=>'',
-			'url'=>'/dolimaps/dolimapsindex.php',
-			'langs'=>'dolimaps@dolimaps', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000 + $r,
-			'enabled'=>'$conf->dolimaps->enabled', // Define condition to show or hide menu entry. Use '$conf->dolimaps->enabled' if entry must be visible if module is enabled.
-			'perms'=>'1', // Use 'perms'=>'$user->rights->dolimaps->myobject->read' if you want your menu with a permission rules
-			'target'=>'',
-			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
-		);
-		/* END MODULEBUILDER TOPMENU */
-		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT
-		$this->menu[$r++]=array(
-			'fk_menu'=>'fk_mainmenu=dolimaps',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'left',                          // This is a Left menu entry
-			'titre'=>'MyObject',
-			'prefix' => img_picto('', $this->picto, 'class="paddingright pictofixedwidth valignmiddle"'),
-			'mainmenu'=>'dolimaps',
-			'leftmenu'=>'myobject',
-			'url'=>'/dolimaps/dolimapsindex.php',
-			'langs'=>'dolimaps@dolimaps',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000+$r,
-			'enabled'=>'$conf->dolimaps->enabled',  // Define condition to show or hide menu entry. Use '$conf->dolimaps->enabled' if entry must be visible if module is enabled.
-			'perms'=>'$user->rights->dolimaps->myobject->read',			                // Use 'perms'=>'$user->rights->dolimaps->level1->level2' if you want your menu with a permission rules
-			'target'=>'',
-			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
-		);
-		$this->menu[$r++]=array(
-			'fk_menu'=>'fk_mainmenu=dolimaps,fk_leftmenu=myobject',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'left',			                // This is a Left menu entry
-			'titre'=>'List_MyObject',
-			'mainmenu'=>'dolimaps',
-			'leftmenu'=>'dolimaps_myobject_list',
-			'url'=>'/dolimaps/myobject_list.php',
-			'langs'=>'dolimaps@dolimaps',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000+$r,
-			'enabled'=>'$conf->dolimaps->enabled',  // Define condition to show or hide menu entry. Use '$conf->dolimaps->enabled' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
-			'perms'=>'$user->rights->dolimaps->myobject->read',			                // Use 'perms'=>'$user->rights->dolimaps->level1->level2' if you want your menu with a permission rules
-			'target'=>'',
-			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
-		);
-		$this->menu[$r++]=array(
-			'fk_menu'=>'fk_mainmenu=dolimaps,fk_leftmenu=myobject',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
-			'type'=>'left',			                // This is a Left menu entry
-			'titre'=>'New_MyObject',
-			'mainmenu'=>'dolimaps',
-			'leftmenu'=>'dolimaps_myobject_new',
-			'url'=>'/dolimaps/myobject_card.php?action=create',
-			'langs'=>'dolimaps@dolimaps',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
-			'position'=>1000+$r,
-			'enabled'=>'$conf->dolimaps->enabled',  // Define condition to show or hide menu entry. Use '$conf->dolimaps->enabled' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
-			'perms'=>'$user->rights->dolimaps->myobject->write',			                // Use 'perms'=>'$user->rights->dolimaps->level1->level2' if you want your menu with a permission rules
-			'target'=>'',
-			'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
-		);
-		END MODULEBUILDER LEFTMENU MYOBJECT */
 		// Exports profiles provided by this module
 		$r = 1;
 		/* BEGIN MODULEBUILDER EXPORT MYOBJECT */

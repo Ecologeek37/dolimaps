@@ -2,7 +2,15 @@
 
 ## Features
 
-Description of the module...
+Add a map link on societe address.
+If clicked, open the map in another browser tab.
+
+## Configuration
+
+Choose your link map type :
+- no link
+- google maps link
+- open street maps link
 
 <!--
 ![Screenshot dolimaps](img/screenshot_dolimaps.png?raw=true "DoliMaps"){imgmd}
